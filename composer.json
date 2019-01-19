@@ -1,0 +1,23 @@
+{
+  "name": "generico/core",
+  "type": "library",
+  "description": "Base library for config-driven WordPress starter theme Generico.",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "Craig Simpson",
+      "email": "craig@craigsimpson.scot",
+      "homepage": "https://craigsimpson.scot",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=7.0",
+    "composer/installers":  "~1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Generico\\Core\\": "src/"
+    }
+  }
+}
