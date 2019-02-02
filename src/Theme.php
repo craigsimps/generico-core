@@ -10,19 +10,38 @@
 
 namespace Generico\Core;
 
+/**
+ * Theme Class
+ *
+ * @package Generico\Core
+ */
 final class Theme {
+
+	/**
+	 * @var array Runtime configuration.
+	 */
+	protected $config;
+
+	/**
+	 * Theme constructor.
+	 *
+	 * @since 0.2.0
+	 *
+	 * @param array $config Runtime configuration.
+	 */
+	public function __construct( array $config ) {
+		$this->config = $config;
+	}
+
+	/**
+	 * Setup method.
+	 *
+	 * Iterates over the runtime configuration and load each related class.
+	 *
+	 * @since 0.1.0
+	 */
 	public function setup() {
-
-		// Set config path, but allow theme to override the location with `generico_config_path` filter.
-		$config_path = apply_filters( 'generico_config_path', get_stylesheet_directory() . '/config/defaults.php' );
-
-		if ( ! file_exists( $config_path ) ) {
-			wp_die( __( 'The theme config file could not be found.', 'generico' ) );
-		}
-
-		$config = include_once $config_path;
-
-		foreach ( $config as $class_name => $class_specific_config ) {
+		foreach ( $this->config as $class_name => $class_specific_config ) {
 			if ( class_exists( $class_name ) ) {
 				$class = new $class_name( $class_specific_config );
 				$class->init();
